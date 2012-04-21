@@ -1,13 +1,11 @@
 import urlparse, urllib, re
 
-def user_friendly_url(url, __cache = {}):
-    result = __cache.get(url)
-    if result != None:
-        return result
+cache = {}
 
-    url_with_proto = url
-    if not re.match('^[a-zA-Z][a-zA-Z0-9.+-]*://', url):
-        url_with_proto = 'http://' + url
+def decode_iri_nocache(iri):
+    url_with_proto = iri
+    if not re.match('^[a-zA-Z][a-zA-Z0-9.+-]*://', iri):
+        url_with_proto = 'http://' + iri
 
     protocol, host, path, query, fragment = list(urlparse.urlsplit(url_with_proto))
 
@@ -47,10 +45,12 @@ def user_friendly_url(url, __cache = {}):
     if after_host != '/':
         result += after_host
 
-    __cache[url] = result
     return result
+
+def decode_iri(iri):
+    return cache.setdefault(iri, decode_iri_nocache(iri))
 
 if __name__ == "__main__":
     import sys
-    print user_friendly_url(sys.argv[1])
+    print decode_iri_nocache(sys.argv[1])
 
