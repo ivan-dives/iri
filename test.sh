@@ -31,3 +31,7 @@ _test \
 _test \
     "xn--80a1acny.xn--p1/%D0%BF%D1%80%D0%B8%D0%B2%D0%B5%D1%82" \
     "xn--80a1acny.xn--p1/привет"
+
+_test \
+    "http://xn--80a1acny.xn--p1ai/?keyword=xn--80a1acny.xn--p1ai" \
+    "http://почта.рф/?keyword=xn--80a1acny.xn--p1ai"

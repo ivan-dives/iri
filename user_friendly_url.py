@@ -10,7 +10,7 @@ def decode_iri_nocache(iri):
 
     try:
         host = r.hostname.decode('idna').encode('utf8')
-        iri = iri.replace(r.hostname, host)
+        iri = iri.replace(r.hostname, host, 1)
     except:
         pass
 
