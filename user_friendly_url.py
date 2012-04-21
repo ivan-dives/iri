@@ -5,11 +5,7 @@ import urlparse
 cache = {}
 
 def decode_iri_nocache(iri):
-    url_with_proto = iri
-    if not re.match('^[a-zA-Z][a-zA-Z0-9.+-]*://', iri):
-        url_with_proto = 'http://' + iri
-
-    protocol, host, path, query, fragment = list(urlparse.urlsplit(url_with_proto))
+    protocol, host, path, query, fragment = list(urlparse.urlsplit(iri))
 
     try: host = host.decode('idna').encode('UTF-8') #punycode to utf-8
     except: pass
