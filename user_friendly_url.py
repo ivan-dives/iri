@@ -1,4 +1,3 @@
-
 import urlparse, urllib, re
 
 def user_friendly_url(url, __cache = {}):
@@ -19,7 +18,7 @@ def user_friendly_url(url, __cache = {}):
     def urldecode(s):
         if '%' not in s:
             return s
-        try: 
+        try:
             def replace_if_url_safe_symbol(match):
                 txt = match.group(0)
                 c = chr(int(txt[1:], 16))
@@ -30,14 +29,14 @@ def user_friendly_url(url, __cache = {}):
             s2 = re.sub('%[0-9A-Fa-f]{2}', replace_if_url_safe_symbol, s)
             s2 = s2.decode('UTF-8').encode('UTF-8') #check, is valid UTF-8
             return s2
-        except UnicodeError: 
+        except UnicodeError:
             return s
-    
+
     path = urldecode(path)
     query = urldecode(query)
     fragment = urldecode(fragment)
-    
-    result = host 
+
+    result = host
     if protocol and protocol.lower() != "http":
         result = protocol + "://" + result
     after_host = path
@@ -47,7 +46,7 @@ def user_friendly_url(url, __cache = {}):
         after_host += '#' + fragment
     if after_host != '/':
         result += after_host
-        
+
     __cache[url] = result
     return result
 
