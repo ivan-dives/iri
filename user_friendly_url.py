@@ -1,4 +1,6 @@
-import urlparse, urllib, re
+import re
+import sys
+import urlparse
 
 cache = {}
 
@@ -51,6 +53,5 @@ def decode_iri(iri):
     return cache.setdefault(iri, decode_iri_nocache(iri))
 
 if __name__ == "__main__":
-    import sys
     print decode_iri_nocache(sys.argv[1])
 
